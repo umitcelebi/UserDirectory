@@ -9,6 +9,5 @@ namespace UserDirectory.Data.Abstract
 {
     public interface IUserRepository:IRepository<User>
     {
-        IQueryable<User> GetAllUser();
     }
 }

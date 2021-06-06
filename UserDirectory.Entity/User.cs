@@ -28,8 +28,7 @@ namespace UserDirectory.Entity
         [Required(ErrorMessage = "Location cannot be empty")]
         public string Location { get; set; }
 
-
-        [Required(ErrorMessage = "Phone cannot be empty")]
+        
         public List<Phone> Phones { get; set; }
     }
 }

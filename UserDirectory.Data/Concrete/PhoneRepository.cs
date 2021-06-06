@@ -11,8 +11,10 @@ namespace UserDirectory.Data.Concrete
 {
     public class PhoneRepository:Repository<Phone>,IPhoneRepository
     {
+        
         public PhoneRepository(DbContext _dbContext) : base(_dbContext)
         {
         }
+        
     }
 }

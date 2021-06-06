@@ -18,12 +18,12 @@ namespace UserDirectory.Data.Concrete
             dbContext = _dbContext;
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             return dbContext.Set<T>().Find(id);
         }
 
-        public IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
         {
             return dbContext.Set<T>();
         }
@@ -38,7 +38,7 @@ namespace UserDirectory.Data.Concrete
             dbContext.Set<T>().Remove(entity);
         }
 
-        public void Edit(T entity)
+        public virtual void Edit(T entity)
         {
             dbContext.Entry<T>(entity).State = EntityState.Modified;
         }

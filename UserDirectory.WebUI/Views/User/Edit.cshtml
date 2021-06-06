@@ -1,0 +1,51 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="text-danger" asp-validation-summary="All"></div>
+<form asp-controller="User" asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="Image" />
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input class="form-control" asp-for="Name">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Surname" class="form-label"></label>
+        <input class="form-control" asp-for="Surname">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input class="form-control" asp-for="Email">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Birthday" class="form-label"></label>
+        <input class="form-control" asp-for="Birthday">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Location" class="form-label"></label>
+        <input class="form-control" asp-for="Location">
+    </div>
+    <div class="mb-3">
+        <img src="~/img/@Model.Image" width="100" />
+        <input type="file" id="file" name="file" class="form-control" asp-for="Image">
+    </div>
+    <div id="phoneArea">
+        @foreach (var item in Model.Phones)
+        {
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input class="form-control" name="Phone" value="@item.PhoneNumber">
+                <a onclick="$(this).parents('div').remove();" class="btn btn-danger">Remove</a>
+            </div>
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

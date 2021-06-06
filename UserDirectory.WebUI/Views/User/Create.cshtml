@@ -1,0 +1,65 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Create User";
+}
+@section headScripts
+{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+}
+<div class="text-danger" asp-validation-summary="All"></div>
+<form asp-controller="User" asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input class="form-control" asp-for="Name">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Surname" class="form-label"></label>
+        <input class="form-control" asp-for="Surname">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input class="form-control" asp-for="Email">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Birthday" class="form-label"></label>
+        <input class="form-control" asp-for="Birthday">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Location" class="form-label"></label>
+        <input class="form-control" asp-for="Location">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Image" class="form-label"></label>
+        <input type="file" id="file" name="file" class="form-control" asp-for="Image">
+    </div>
+    <div class="mb-4">
+        <div id="phoneArea">
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input class="form-control" name="Phone">
+            </div>
+        </div>
+        <a id="ekle" class="btn btn-info">Add a New Phone</a>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $("#ekle").click(function() {
+
+            d = document.createElement('div');
+            $(d).addClass("mb-3")
+                .html("<label class='form-label'>Phone</label>" +
+                    "<input class='form-control' name='Phone'/>")
+                .appendTo($("#phoneArea"));
+
+        });
+    });
+
+</script>

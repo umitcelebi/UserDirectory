@@ -17,7 +17,7 @@ namespace UserDirectory.WebUI.Controllers
 
         public IActionResult Index()
         {
-            return View(repository.GetAllUser());
+            return View(repository.GetAll());
         }
     }
 }
