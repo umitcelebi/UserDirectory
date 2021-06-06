@@ -21,6 +21,7 @@ namespace UserDirectory.WebUI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                .UseDefaultServiceProvider(option => option.ValidateScopes = false);
     }
 }
