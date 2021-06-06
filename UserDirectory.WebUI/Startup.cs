@@ -29,9 +29,10 @@ namespace UserDirectory.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),b=>b.MigrationsAssembly("UserDirectory.WebUI")));
-            services.AddTransient<IUserRepository,UserRepository>();
-            services.AddTransient<IPhoneRepository,PhoneRepository>();
+            services.AddSingleton<DbContext, ApplicationContext>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IPhoneRepository, PhoneRepository>();
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("UserDirectory.WebUI")));
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
@@ -50,7 +51,6 @@ namespace UserDirectory.WebUI
             }
 
             app.UseHttpsRedirection();
-            app.UseRouting();
             app.UseAuthentication();
             app.UseStatusCodePages();
             app.UseStaticFiles();

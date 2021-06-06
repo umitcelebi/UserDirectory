@@ -11,8 +11,15 @@ namespace UserDirectory.Data.Concrete
 {
     public class UserRepository:Repository<User>,IUserRepository
     {
+        private DbContext context;
         public UserRepository(DbContext _dbContext) : base(_dbContext)
         {
+            context = _dbContext;
+        }
+
+        public IQueryable<User> GetAllUser()
+        {
+            return context.Set<User>().Include(p => p.Phones);
         }
     }
 }
