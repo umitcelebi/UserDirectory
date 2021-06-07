@@ -44,22 +44,39 @@
                 <input class="form-control" name="Phone">
             </div>
         </div>
-        <a id="ekle" class="btn btn-info">Add a New Phone</a>
+        <a id="addPhone" class="btn btn-info">Add a New Phone</a>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 <script>
     $(document).ready(function () {
-        $("#ekle").click(function() {
+        $("#addPhone").click(function () {
 
-            d = document.createElement('div');
-            $(d).addClass("mb-3")
-                .html("<label class='form-label'>Phone</label>" +
-                    "<input class='form-control' name='Phone'/>")
-                .appendTo($("#phoneArea"));
+            a = document.createElement('a');
+            $(a).addClass("btn btn-danger col-md-2");
+            $(a).append("Remove");
+            $(a).attr("onclick", "$(this).parent('div').parent('div').remove();");
+
+            input = document.createElement('input');
+            $(input).addClass("form-control col-md-10");
+            $(input).attr("name", "Phone");
+
+            div1 = document.createElement('div');
+            $(div1).addClass("row");
+
+            div2 = document.createElement('div');
+            $(div2).addClass("mb-3");
+
+            div1.append(input);
+            div1.append(a);
+
+            div2.append("Phone");
+            div2.append(div1);
+            $("#phoneArea").append(div2);
 
         });
+
     });
 
 </script>

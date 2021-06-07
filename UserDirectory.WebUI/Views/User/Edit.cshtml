@@ -4,6 +4,11 @@
     ViewData["Title"] = "Edit User";
 }
 
+@section headScripts
+{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+}
+
 <div class="text-danger" asp-validation-summary="All"></div>
 <form asp-controller="User" asp-action="Edit" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="UserId" />
@@ -36,16 +41,52 @@
         <img src="~/img/@Model.Image" width="100" />
         <input type="file" id="file" name="file" class="form-control" asp-for="Image">
     </div>
-    <div id="phoneArea">
-        @foreach (var item in Model.Phones)
-        {
-            <div class="mb-3">
-                <label class="form-label">Phone</label>
-                <input class="form-control" name="Phone" value="@item.PhoneNumber">
-                <a onclick="$(this).parents('div').remove();" class="btn btn-danger">Remove</a>
-            </div>
-        }
+    <div class="mb-3">
+        <div id="phoneArea">
+            @foreach (var item in Model.Phones)
+            {
+                <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    <div class="row">
+                        <input class=" form-control col-md-10" name="Phone" value="@item.PhoneNumber">
+                        <a class="btn btn-danger col-md-2" onclick="$(this).parent('div').parent('div').remove();">Remove</a>
+                    </div>
+                </div>
+            }
+        </div>
+        <a id="addPhone" class="btn btn-info">Add a New Phone</a>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+<script>
+    $(document).ready(function () {
+        $("#addPhone").click(function () {
+
+            a = document.createElement('a');
+            $(a).addClass("btn btn-danger col-md-2");
+            $(a).append("Remove");
+            $(a).attr("onclick", "$(this).parent('div').parent('div').remove();");
+
+            input = document.createElement('input');
+            $(input).addClass("form-control col-md-10");
+            $(input).attr("name", "Phone");
+
+            div1 = document.createElement('div');
+            $(div1).addClass("row");
+
+            div2 = document.createElement('div');
+            $(div2).addClass("mb-3");
+
+            div1.append(input);
+            div1.append(a);
+
+            div2.append("Phone");
+            div2.append(div1);
+            $("#phoneArea").append(div2);
+            
+        });
+        
+    });
+
+</script>

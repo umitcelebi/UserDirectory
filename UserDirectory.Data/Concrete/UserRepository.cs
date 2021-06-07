@@ -9,7 +9,7 @@ using UserDirectory.Entity;
 
 namespace UserDirectory.Data.Concrete
 {
-    public class UserRepository:Repository<User>,IUserRepository
+    public class UserRepository : Repository<User>, IUserRepository
     {
         private DbContext context;
         public UserRepository(DbContext _dbContext) : base(_dbContext)
@@ -19,7 +19,29 @@ namespace UserDirectory.Data.Concrete
 
         public override IQueryable<User> GetAll()
         {
-            return context.Set<User>().Include(p => p.Phones);
+            List<User> list = context.Set<User>().Include(p => p.Phones).ToList();
+            int size = list.Count();
+            User user;
+            for (int i = 0; i < size - 1; i++)
+            {
+                for (int j = i + 1; j < size; j++)
+                {
+                    if (list[i].Name.CompareTo(list[j].Name)>0 )
+                    {
+                        user = list[i];
+                        list[i] = list[j];
+                        list[j] = user;
+                    }
+                    else if(list[i].Name.CompareTo(list[j].Name) == 0 && list[i].Surname.CompareTo(list[j].Surname)>0)
+                    {
+                        user = list[i];
+                        list[i] = list[j];
+                        list[j] = user;
+                    }
+                }
+            }
+
+            return list.AsQueryable();
         }
 
         public override User GetById(int id)
