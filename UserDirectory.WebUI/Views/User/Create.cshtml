@@ -9,6 +9,7 @@
 }
 <div class="text-danger" asp-validation-summary="All"></div>
 <form asp-controller="User" asp-action="Create" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Image" value="profile.png"/>
     <div class="mb-3">
         <label asp-for="Name" class="form-label"></label>
         <input class="form-control" asp-for="Name">

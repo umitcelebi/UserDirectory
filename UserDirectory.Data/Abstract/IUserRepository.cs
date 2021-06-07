@@ -9,5 +9,6 @@ namespace UserDirectory.Data.Abstract
 {
     public interface IUserRepository:IRepository<User>
     {
+        IQueryable<User> SearchByName(string name);
     }
 }

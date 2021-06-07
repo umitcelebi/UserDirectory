@@ -63,5 +63,10 @@ namespace UserDirectory.Data.Concrete
                 user.Location = entity.Location;
             }
         }
+
+        public IQueryable<User> SearchByName(string name)
+        {
+            return context.Set<User>().Where(u => u.Name.Contains(name));
+        }
     }
 }

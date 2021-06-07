@@ -15,8 +15,12 @@ namespace UserDirectory.WebUI.Controllers
             repository=_repository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string name)
         {
+            if (!string.IsNullOrEmpty(name))
+            {
+                return View(repository.SearchByName(name));
+            }
             return View(repository.GetAll());
         }
     }
